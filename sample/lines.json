@@ -1,0 +1,15 @@
+{
+  "no_marker_code": "E_NO_MARKER",
+  "marker": "\\",
+  "changed": [1],
+  "done_lines": [3],
+  "lines": [
+    "start \\",
+    "middle \\",
+    "end",
+    "tail",
+    "last \\",
+    "more"
+  ],
+  "trailing": true
+}
