@@ -3,8 +3,14 @@ import { joinLines } from "./join.js";
 import { remap } from "./remap.js";
 
 export function render(spec) {
-  const joined = joinLines(spec.lines || [], spec.marker);
-  const mapped = remap(spec.lines || [], spec.marker, spec.changed || [], spec.done_lines || []);
+  const lines = spec.lines || [];
+  const marker = spec.marker;
+  const changed = spec.changed || [];
+  const done = spec.done_lines || [];
+  const joined = joinLines(lines, marker);
+  const mapped = remap(lines, marker, changed, done);
+  const repeat = remap(lines, marker, changed, done);
+  const idempotent = JSON.stringify(mapped) === JSON.stringify(repeat);
   return { logical: joined.logical, mapping: joined.mapping, rescanned: mapped.rescanned,
-           skipped: mapped.skipped, idempotent: true };
+           skipped: mapped.skipped, idempotent: idempotent };
 }
